@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 
-uint64_t sieb(uint64_t nFrom, uint64_t nTo, std::fstream* file) noexcept
+uint64_t sieb(uint64_t nFrom, uint64_t nTo, std::ofstream* file) noexcept
 {
 	uint64_t nSize = nTo - nFrom;
 	bool *pSieb = new bool[nSize];
@@ -26,7 +26,7 @@ uint64_t sieb(uint64_t nFrom, uint64_t nTo, std::fstream* file) noexcept
 		{
 			if (pSieb[i - nFrom])
 			{
-				*file << std::to_string(i + 2) << std::endl;
+				*file << std::to_string(i + 2) << '\n';
 				n++;
 			}
 		}
@@ -39,13 +39,12 @@ uint64_t sieb(uint64_t nFrom, uint64_t nTo, std::fstream* file) noexcept
 
 void prime(uint64_t nTo)
 {
-	system("type nul > output.log");
-	std::fstream *file = new std::fstream("output.log");
+	std::ofstream *file = new std::ofstream("output.log");
 	file->clear();
 
 	uint64_t nFound = 0;
 	uint64_t nSteps = ceil((double)nTo / 1e10);
-
+	
 	for (uint64_t i = 0; i < nSteps; i++)
 	{
 		uint64_t from = i * 1e10;
@@ -56,5 +55,5 @@ void prime(uint64_t nTo)
 		nFound += sieb(from, to, file);
 	}
 
-	std::cout << "total prime numbers in the range to " << nTo << ": " << nFound << std::endl;
+	std::cout << "total prime numbers in the range from 0 to " << nTo << ": " << nFound << std::endl;
 }

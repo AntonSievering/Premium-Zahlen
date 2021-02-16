@@ -2,5 +2,5 @@
 
 int main()
 {
-	prime(1e9);
+	prime(1E12);
 }
