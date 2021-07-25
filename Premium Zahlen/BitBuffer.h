@@ -36,8 +36,8 @@ public:
 		const std::size_t b = i / 8;
 		const std::size_t o = i % 8;
 		const uint8_t mask = 1 << o;
-		const bool currentBit = (pMemory.get()[b] & mask) > 0;
-		pMemory.get()[b] += mask - (currentBit << o);
+		
+		pMemory.get()[b] |= mask;
 	}
 
 	void clearBit(const std::size_t &i)
@@ -45,8 +45,8 @@ public:
 		const std::size_t b = i / 8;
 		const std::size_t o = i % 8;
 		const uint8_t mask = 1 << o;
-		const bool currentBit = (pMemory.get()[b] & mask) > 0;
-		pMemory.get()[b] -= mask - ((!currentBit) << o);
+
+		pMemory.get()[b] &= ~mask;
 	}
 
 	void clear()
